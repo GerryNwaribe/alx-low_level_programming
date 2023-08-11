@@ -2,19 +2,17 @@
 #include <time.h>
 #include <stdio.h>
 /**
- * main - header
- * main - print last digit of string
- *
+ * main -header
+ * main -enter header
  * Return: 0
  */
-
 int main(void)
 {
-	int n;
-	int lastNum = n % 10;
+	int n, lastNum;
 
 	srand(time(0));
 	n = rand() - RAND_MAX / 2;
+	lastNum = n % 10;
 
 	if (n > 5)
 	{
@@ -26,7 +24,7 @@ int main(void)
 	}
 	else
 	{
-		printf("Last digit of %d is %d and is 0\n", n, lastNum);
+		printf("Last digits of %d is %d and is 0\n", n, lastNum);
 	}
 	return (0);
 }
