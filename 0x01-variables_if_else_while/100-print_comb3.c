@@ -11,7 +11,7 @@ int main(void)
 
 	while (firstNum < 9)
 	{
-		int lastNum = 1;
+		int lastNum = firstNum + 1;
 
 		while (lastNum <= 9)
 		{
