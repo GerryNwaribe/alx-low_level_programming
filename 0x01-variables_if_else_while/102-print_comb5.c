@@ -16,8 +16,6 @@ int main(void)
 
 		for (sSet = ftSet + 1; sSet <= 99; sSet++)
 		{
-
-		putchar (' ');
 		putchar ('0' + (ftSet / 10));
 		putchar ('0' + (ftSet % 10));
 		putchar (' ');
