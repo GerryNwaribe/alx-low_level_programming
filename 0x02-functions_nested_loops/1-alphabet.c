@@ -1,19 +1,20 @@
-#include <stdio.h>
 #include "main.h"
+#include <stdio.h>
 /**
+ * print_alphabet - function to list alphabets
  * main - Entry point
- * description - function to list alphabets
  *
  * Return: 0
  */
 void print_alphabet(void)
 {
-	char letter = 'a';
-	
-	while (letter <= 'z')
+	char let = 'a';
+
+	while (let <= 'z')
 	{
-		putchar(letter);
-		letter++;
+		_putchar(let);
+		let++;
 	}
-	putchar('\n');
+	_putchar('\n');
+	return (0);
 }
