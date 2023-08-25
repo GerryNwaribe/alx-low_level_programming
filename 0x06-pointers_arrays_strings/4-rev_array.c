@@ -18,6 +18,5 @@ void reverse_array(int *a, int n)
 		a[i] = a[n - i - 1];
 		a[n - i - 1] = tempVar;
 	}
-	putchar (tempVar);
 
 }
