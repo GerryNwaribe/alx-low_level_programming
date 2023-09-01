@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 /**
  * main - entry point
  * @argc: argument count
@@ -22,7 +23,7 @@ int main(int argc, char *argv[])
 	{
 		int num = atoi(argv[i]);
 
-		if (num <= 0)
+		if (!isdigit(num))
 		{
 			printf("Error\n");
 			return (1);
