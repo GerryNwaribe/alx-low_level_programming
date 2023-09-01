@@ -8,6 +8,18 @@
  */
 char *_strpbrk(char *s, char *accept)
 {
+	int k;
 
-return (0);
+        while (*s)
+        {
+                for (k = 0; accept[k]; k++)
+                {
+                        if (*s == accept[k])
+        /* Return a pointer to the first matching character in 's'. */
+                                return (s);
+                }
+                s++;
+        }
+
+        return ('\0'); /* Return NULL if no match is found. */
 }
