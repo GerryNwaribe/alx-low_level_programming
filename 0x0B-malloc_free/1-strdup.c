@@ -7,13 +7,13 @@
  */
 char *_strdup(char *str)
 {
-	unsigned int size = 0;
-	unsigned int b;
+	int size = 0;
+	int b;
 	char *a;
 
-	if (*str == '\0')
+	if (str == NULL)
 	{
-		return (NULL);
+		return (0);
 	}
 	while (str[size] != '\0')
 	{
