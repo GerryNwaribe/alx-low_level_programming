@@ -1,3 +1,4 @@
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "main.h"
@@ -9,38 +10,37 @@
  */
 char *str_concat(char *s1, char *s2)
 {
-	int a;
-	int b;
-	int lenght1 = 0;
-	int lenght2 = 0;
+	unsigned int a, b, lenght;
 	char *c;
 
-	while (s1[lenght1] != '\0')
-	{
-		lenght1++;
-	}
-	while (s2[lenght2] != '\0')
-	{
-		lenght2++;
-	}
+	if (s1 == NULL && s2 == NULL)
+		lenght = 1;
+	else if (s1 != NULL && s2 != NULL)
+		lenght = strlen(s1) + strlen(s2) + 1;
+	else if (s1 == NULL && s2 != NULL)
+		lenght = strlen(s2) + 1;
+	else if (s1 != NULL && s2 == NULL)
+		lenght = strlen(s1) + 1;
 
-	c = malloc((lenght1 + lenght2 + 1) * sizeof(char));
-
-	if (c == 0)
+	c = malloc(lenght * sizeof(char));
+	if (c == NULL)
 	{
 		return (0);
 	}
-	for (a = 0; s1[a] != '\0'; a++)
+	if (s1 != NULL)
 	{
-		c[a] = s1[a];
-
+		for (a = 0; s1[a] != '\0'; a++)
+		{
+			c[a] = s1[a];
+		}
 	}
-	for (b = 0; s2[b] != '\0'; b++)
+	if (s2 != NULL)
 	{
-		c[a + b] = s2[b];
+		for (b = 0; s2[b] != '\0'; b++)
+		{
+			c[a + b] = s2[b];
+		}
 	}
-
-	c[a + b] = '\0';
+	c[lenght - 1] = '\0';
 	return (c);
-	free(c);
 }
