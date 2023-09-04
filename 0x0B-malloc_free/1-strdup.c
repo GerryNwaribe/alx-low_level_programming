@@ -7,8 +7,8 @@
  */
 char *_strdup(char *str)
 {
-	int size = 0;
-	int b;
+	unsigned int size = 0;
+	unsigned int b;
 	char *a;
 
 	if (*str == '\0')
@@ -24,7 +24,7 @@ char *_strdup(char *str)
 
 	if (a == NULL)
 	{
-		return (NULL);
+		return (0);
 	}
 
 	for (b = 0; b <= size; b++)
