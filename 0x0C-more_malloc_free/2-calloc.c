@@ -10,16 +10,18 @@
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
 	void *ab;
+	unsigned int finalSize;
 
 	if (nmemb == 0 || size == 0)
 	{
 		return (NULL);
 	}
-	ab = malloc(size * nmemb);
+	finalSize = size * nmemb;
+	ab = malloc(finalSize);
 	if (ab == NULL)
 	{
 		return (NULL);
 	}
-
+	memset(ab, 0, finalSize);
 	return (ab);
 }
