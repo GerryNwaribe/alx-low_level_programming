@@ -15,30 +15,39 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	unsigned int len1 = 0;
 	unsigned int len2 = 0;
 	unsigned int finalLen = 0;
-	unsigned int copy_len;
 	char *c;
+	unsigned int a = 0;
+	unsigned int b = 0;
 
-	s1 = (s1 == NULL) ? "" : s1;
-	s2 = (s2 == NULL) ? "" : s2;
-
-	len1 = strlen(s1);
-	len2 = strlen(s2);
+	len1 = s1 ? strlen(s1) : 0;
+	len2 = s2 ? strlen(s2) : 0;
 	finalLen = len1 + len2 + 1;
-	if (len2 <= n)
-		c = (char *)malloc((len1 + n + 1) * sizeof(char));
+	if (n < len2)
+		c = malloc((len1 + n + 1) * sizeof(char));
 	else
-		c = (char *)malloc((finalLen + 1) * sizeof(char));
+		c = malloc((finalLen) * sizeof(char));
 
 	if (c == NULL)
 	{
 		return (NULL);
 	}
 
-	memcpy(c, s1, len1);
+	while (s1 && a < len1)
+	{
+		c[a] = s1[a];
+		a++;
+	}
 
-	copy_len = n < len2 ? n : len2;
-	memcpy(c + len1, s2, copy_len);
+	while (s2 && n < len2 && a < (len1 + n))
+	{
+		c[a++] = s2[b++];
+	}
 
-	c[finalLen] = '\0';
+	while (s2 && n >= len2 && a < (len1 + len2))
+	{
+		c[a++] = s2[b++];
+	}
+
+	c[a] = '\0';
 	return (c);
 }
