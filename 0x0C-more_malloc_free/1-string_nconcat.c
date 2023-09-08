@@ -23,17 +23,12 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 
 	len1 = strlen(s1);
 	len2 = strlen(s2);
-
+	finalLen = len1 + len2 + 1;
 	if (len2 <= n)
-	{
-		finalLen = len1 + len2 + 1;
-	}
+		c = (char *)malloc((len1 + n + 1) * sizeof(char));
 	else
-	{
-		finalLen = len1 + n;
-	}
+		c = (char *)malloc((finalLen + 1) * sizeof(char));
 
-	c = (char *)malloc((finalLen + 1) * sizeof(char));
 	if (c == NULL)
 	{
 		return (NULL);
