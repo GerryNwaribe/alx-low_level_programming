@@ -16,26 +16,13 @@ struct dog
 	char *owner;
 };
 /**
- * dog *doggie - prototype
- * @name: name
- * @age: age
- * @owner: owner
+ * dog_t - datatype of struct dog
  * Return: 0
  */
-struct dog *doggie(char *name, float age, char *owner)
-{
-	struct dog *dogg;
+typedef struct dog dog_t;
 
-	dogg = malloc(sizeof(struct dog));
-	if (dogg == NULL)
-	{
-		return (NULL);
-	}
-	dogg->name = name;
-	dogg->age = age;
-	dogg->owner = owner;
-
-	return (dogg);
-}
-
+void init_dog(struct dog *d, char *name, float age, char *owner);
+void print_dog(struct dog *d);
+dog_t *new_dog(char *name, float age, char *owner);
+void free_dog(dog_t *d);
 #endif
