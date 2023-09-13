@@ -3,7 +3,8 @@
 /**
  * main - entry point
  * description - headers
- *
+ * @name: name to be printed
+ * @f: funtion pointer
  * Return: 0
  */
 void print_name(char *name, void (*f)(char *));
