@@ -12,7 +12,7 @@ void print_strings(const char *separator, const unsigned int n, ...)
 	va_list quarrel;
 
 	va_start(quarrel, n);
-	while (a > 0)
+	while (a < n)
 	{
 		b = va_arg(quarrel, char *);
 		if (b != NULL)
