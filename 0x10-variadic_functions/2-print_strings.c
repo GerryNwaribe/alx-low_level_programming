@@ -27,7 +27,7 @@ void print_strings(const char *separator, const unsigned int n, ...)
 		{
 			printf("%s", separator);
 		}
-		a--;
+		a++;
 	}
 	printf("\n");
 	va_end(quarrel);
