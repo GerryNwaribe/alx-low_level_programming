@@ -7,27 +7,30 @@
  */
 void print_strings(const char *separator, const unsigned int n, ...)
 {
-    unsigned int x_idx = 0;  /* Index for iterating through the strings */
-    va_list x_list;          /* Variable argument list */
+	char *b;
+	unsigned int a = 0;
+	va_list quarrel;
 
-    va_start(x_list, n);
-
-    while (x_idx < n)  /* Loop through strings except the last one */
-    {
-        char *str = va_arg(x_list, char*);
-
-        if (str != NULL)
-            printf("%s", str);
-        else
-            printf("(nil)");
-
-        if (x_idx != (n - 1) && separator != NULL)/* Check if not the last string */
-            printf("%s", separator);
-
-        x_idx++;
-    }
-
-    printf("\n");  /* Add a newline character at the end for formatting */
-    va_end(x_list);
+	va_start(quarrel, n);
+	while (a < n)
+	{
+		b = va_arg(quarrel, char *);
+		if (b != NULL)
+		{
+			printf("%s", b);
+		}
+		else
+		{
+			printf("(nil)");
+		}
+		if (a != (n - 1) && separator != NULL)
+		{
+			printf("%s", separator);
+		}
+		a++;
+	}
+	printf("\n");
+	va_end(quarrel);
 }
+
 

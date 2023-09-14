@@ -2,6 +2,7 @@
 #define variadic_functions_h
 #include <stdio.h>
 #include <stdarg.h>
+#include <stdlib.h>
 /**
  * main - entry point
  * description- headers
