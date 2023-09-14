@@ -8,7 +8,7 @@
  */
 void print_all(const char * const format, ...)
 {
-	char *str, *seperate = ""; 
+	char *str, *seperate = "";
 	int a = 0;
 	va_list quarrel;
 
