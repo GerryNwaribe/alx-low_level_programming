@@ -8,49 +8,41 @@
  */
 void print_all(const char * const format, ...)
 {
-	char *str;
+	char *str, *seperate = ""; 
 	int a = 0;
 	va_list quarrel;
-	int b = 0;
+
 	va_start(quarrel, format);
 	if (format)
 	{
-		while (format[a] != '\0')
+		while (format[a])
 		{
 			switch (format[a])
 			{
 				case 'c':
-					printf("%c", va_arg(quarrel, int));
-					b = 1;
+					printf("%s%c", seperate, va_arg(quarrel, int));
 					break;
 				case 'i':
-					printf("%d", va_arg(quarrel, int));
-					b = 1;
+					printf("%s%d", seperate, va_arg(quarrel, int));
 					break;
 				case 'f':
-					printf("%f", va_arg(quarrel, double));
-					b = 1;
+					printf("%s%f", seperate, va_arg(quarrel, double));
 					break;
 				case 's':
 					{
-						str = va_arg(quarrel, char *);
-						if (str == NULL)
-						{
-							printf("(nil)");
-							break;
-						}
-						printf("%s", str);
-						b = 1;
-						break;
+					str = va_arg(quarrel, char *);
+					if (str == NULL)
+					{
+					str = "(nil)";
+					}
+					printf("%s%s", seperate, str);
+					break;
 					}
 				default:
-					break;
+				continue;
 			}
-			if (format[a + 1] != '\0' && b)
-				printf(", ");
+			seperate = ", ";
 			a++;
-			b = 0;
-
 		}
 	}
 	printf("\n");
