@@ -5,7 +5,7 @@
  *
  * Return: Always 0.
  */
-void print_before_main(void);
+void print_before_main();
 int main(void)
 {
 	print_before_main();
