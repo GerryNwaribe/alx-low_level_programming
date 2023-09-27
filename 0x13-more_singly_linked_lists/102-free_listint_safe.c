@@ -30,5 +30,6 @@ size_t free_listint_safe(listint_t **h)
 
 	*h = NULL; /* Set the head to NULL */
 
-	return node_count; /* Return the number of nodes that were freed */
+	return (node_count); /* Return the number of nodes that were freed */
 }
+
