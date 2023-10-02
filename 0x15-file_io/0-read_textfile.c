@@ -11,20 +11,20 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	char buffer[1024];
 	ssize_t total_letters_read = 0;
 	size_t letters_read;
-	FILE *file_pointer = fopen(filename, "r");
-
-	if (file_pointer == NULL)
-		return (0);
-
+	FILE *file_pointer;
 
 	if (filename == NULL)
 		return (0);
 
+	file_pointer = fopen(filename, "r");
+	if (file_pointer == NULL)
+	{
+		return (0);
+	}
 	while ((letters_read = fread(buffer, 1, sizeof(buffer), file_pointer)) > 0)
 	{
 		if (total_letters_read + letters_read > letters)
 		{
-
 			letters_read = letters - total_letters_read;
 		}
 
@@ -36,8 +36,10 @@ ssize_t read_textfile(const char *filename, size_t letters)
 
 		total_letters_read += letters_read;
 	}
-
 	fclose(file_pointer);
-
+	if (total_letters_read < 0)
+	{
+		return (0);
+	}
 	return (total_letters_read);
 }
