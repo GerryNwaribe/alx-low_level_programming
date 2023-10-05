@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
 	int fd_src = open(file_from, O_RDONLY);
 	int fd_dest = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR
-			| S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+			| S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH, 0664);
 	if (argc != 3)
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
