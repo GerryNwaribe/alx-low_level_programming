@@ -25,14 +25,14 @@ int main(int argc, char *argv[])
 	buffer = malloc(sizeof(char) * BUFSIZE);
 	if (buffer == NULL)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_from);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
 		exit(99);
 	}
 
 	fd_src = open(file_from, O_RDONLY);
 	if (fd_src < 0)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_to);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
 		free(buffer);
 		exit(98);
 	}
@@ -40,12 +40,12 @@ int main(int argc, char *argv[])
 	fd_dest = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (fd_dest < 0)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_from);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
 		free(buffer);
 		exit(99);
 	}
 	do {
-		bytes_read = read(fd_src, buffer, BUFSIZE) > 0;
+		bytes_read = read(fd_src, buffer, BUFSIZE);
 		if (fd_src < 0 || bytes_read < 0)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_to);
