@@ -10,14 +10,18 @@ int main(int argc, char *argv[])
 {
 	ssize_t bytes_read = 0, bytes_written, close_to, close_from, fd_src, fd_dest;
 	char *buffer;
-	char *file_from = argv[1];
-	char *file_to = argv[2];
+	char *file_from;
+	char *file_to;
 
 	if (argc != 3)
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
+
+	file_from = argv[1];
+	file_to = argv[2];
+
 	buffer = malloc(sizeof(char) * BUFSIZE);
 	if (buffer == NULL)
 	{
