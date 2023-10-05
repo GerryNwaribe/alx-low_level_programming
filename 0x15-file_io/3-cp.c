@@ -5,46 +5,67 @@
  * @argc: argument count
  * Return: 0
  */
+int main(int argc, char *argv[]);
 int main(int argc, char *argv[])
 {
-	ssize_t bytes_read, bytes_written;
-	char buffer[BUFSIZE];
-	const char *file_from = argv[1];
-	const char *file_to = argv[2];
+	ssize_t bytes_read, bytes_written, close_to, close_from;
+	char *buffer;
+	char *file_from = argv[1];
+	char *file_to = argv[2];
 
 	int fd_src = open(file_from, O_RDONLY);
 	int fd_dest = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR
-			| S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH));
+			| S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 	if (argc != 3)
 	{
-		print_error(97, "Usage: cp file_from file_to");
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
 	}
-	if (fd_src == -1)
+	buffer = malloc(sizeof(char) * BUFSIZE);
+	if (buffer == NULL)
 	{
-		print_error(98, "Can't read from file");
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_from);
+		exit(99);
 	}
-	if (fd_dest == -1)
-		print_error(99, "Can't write to file");
-
-	while ((bytes_read = read(fd_src, buffer, BUFSIZE)) > 0)
+	if (fd_src < 0)
 	{
-		bytes_written = write(fd_dest, buffer, bytes_read);
-		if (bytes_written == -1)
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_to);
+		free(buffer);
+		exit(98);
+	}
+	if (fd_dest < 0)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_from);
+		free(buffer);
+		exit(99);
+	}
+	do {
+		bytes_read = read(fd_src, buffer, BUFSIZE) > 0;
+		if (fd_src < 0 || bytes_read < 0)
 		{
-			print_error(99, "Can't write to file");
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_to);
+			free(buffer);
+			exit(98);
 		}
-	}
-	if (bytes_read == -1)
+		bytes_written = write(fd_dest, buffer, bytes_read);
+		if (fd_dest < 0 || bytes_written < 0)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_from);
+			free(buffer);
+			exit(99);
+		}
+	} while (bytes_read > 0);
+
+	free(buffer);
+	close_to = close(fd_dest);
+	close_from = close(fd_dest);
+	if (close_to < 0 || close_from < 0)
 	{
-		print_error(98, "Can't read from file");
+		dprintf(STDERR_FILENO, "Error: Can't close fd %u\n",
+				(close_to < 0) ? fd_dest : fd_src);
+		exit(100);
 	}
-	if (close(fd_src) == -1)
-	{
-		print_error(100, "Can't close fd");
-	}
-	if (close(fd_dest) == -1)
-	{
-		print_error(100, "Can't close fd");
-	}
+
+
 	return (0);
 }
