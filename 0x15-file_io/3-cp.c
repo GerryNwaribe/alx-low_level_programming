@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
 
 	free(buffer);
 	close_to = close(fd_dest);
-	close_from = close(fd_dest);
+	close_from = close(fd_src);
 	if (close_to < 0 || close_from < 0)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %lu\n",
