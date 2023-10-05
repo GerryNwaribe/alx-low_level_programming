@@ -8,13 +8,10 @@
 int main(int argc, char *argv[]);
 int main(int argc, char *argv[])
 {
-	ssize_t bytes_read, bytes_written, close_to, close_from;
+	ssize_t bytes_read, bytes_written, close_to, close_from, fd_src, fd_dest;
 	char *buffer;
 	char *file_from = argv[1];
 	char *file_to = argv[2];
-
-	int fd_src = open(file_from, O_RDONLY);
-	int fd_dest = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 
 	if (argc != 3)
 	{
@@ -27,12 +24,16 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_from);
 		exit(99);
 	}
+
+	fd_src = open(file_from, O_RDONLY);
 	if (fd_src < 0)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_to);
 		free(buffer);
 		exit(98);
 	}
+
+	fd_dest = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (fd_dest < 0)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_from);
@@ -61,11 +62,9 @@ int main(int argc, char *argv[])
 	close_from = close(fd_dest);
 	if (close_to < 0 || close_from < 0)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %u\n",
+		dprintf(STDERR_FILENO, "Error: Can't close fd %lu\n",
 				(close_to < 0) ? fd_dest : fd_src);
 		exit(100);
 	}
-
-
 	return (0);
 }
