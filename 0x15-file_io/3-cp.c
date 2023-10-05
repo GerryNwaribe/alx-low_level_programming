@@ -8,7 +8,7 @@
 int main(int argc, char *argv[]);
 int main(int argc, char *argv[])
 {
-	ssize_t bytes_read, bytes_written, close_to, close_from, fd_src, fd_dest;
+	ssize_t bytes_read = 0, bytes_written, close_to, close_from, fd_src, fd_dest;
 	char *buffer;
 	char *file_from = argv[1];
 	char *file_to = argv[2];
