@@ -48,14 +48,14 @@ int main(int argc, char *argv[])
 		bytes_read = read(fd_src, buffer, BUFSIZE);
 		if (fd_src < 0 || bytes_read < 0)
 		{
-			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_to);
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
 			free(buffer);
 			exit(98);
 		}
 		bytes_written = write(fd_dest, buffer, bytes_read);
 		if (fd_dest < 0 || bytes_written < 0)
 		{
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_from);
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
 			free(buffer);
 			exit(99);
 		}
