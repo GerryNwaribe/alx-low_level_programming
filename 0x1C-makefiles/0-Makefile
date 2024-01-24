@@ -1,0 +1,12 @@
+# The all rule builds your executable
+# name of the executable: school
+ all: school
+
+ school: school.o school.c
+    gcc -o school school.c school.o 
+
+school.o: school.c
+	gcc -c school.c
+
+clean:
+	rm -f school school.o
