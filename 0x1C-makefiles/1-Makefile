@@ -4,17 +4,19 @@
 
 CC = gcc
 SRC = school.c main.c
+OBJ = school.o
+EXE = school
 
-all: school
+.PHONY: all
 
-school: school.o main.o
-	$(CC) -o school school.o main.o
+all: $(EXE)
 
-school.o: $(SRC)
+$(EXE): $(OBJ) $(SRC)
+	$(CC) -o $(EXE) $(SRC)
+
+$(OBJ): school.c
 	$(CC) -c school.c
 
-main.o: $(SRC)
-	$(CC) -c $(SRC)
-
 clean:
-	rm -f school school.o
+	rm -f $(EXE) $(OBJ)
+
