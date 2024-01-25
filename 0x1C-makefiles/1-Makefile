@@ -1,22 +1,10 @@
 # variables: CC, SRC
 # CC: the compiler to be used
 # SRC: the .c files
-
 CC = gcc
 SRC = school.c main.c
-OBJ = school.o
-EXE = school
 
-.PHONY: all
+all: school
 
-all: $(EXE)
-
-$(EXE): $(OBJ) $(SRC)
-	$(CC) -o $(EXE) $(SRC)
-
-$(OBJ): school.c
-	$(CC) -c school.c
-
-clean:
-	rm -f $(EXE) $(OBJ)
-
+school: school.o $(SRC)
+	$(CC) $(SRC) -o school
