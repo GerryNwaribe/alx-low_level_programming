@@ -26,3 +26,5 @@ oclean:
 
 fclean:
 	$(RM) -f $(NAME)
+
+re: fclean all
