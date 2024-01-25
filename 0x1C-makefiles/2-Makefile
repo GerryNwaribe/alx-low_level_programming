@@ -1,0 +1,14 @@
+# variables: CC, SRC
+# CC: the compiler to be used
+# SRC: the .c files
+# OBJ: the .o files
+# NAME: the name of the executable
+CC = gcc
+SRC = school.c main.c
+NAME = school
+OBJ = school.o
+
+all: $(NAME)
+
+$(NAME): $(OBJ) $(SRC)
+	$(CC) $(SRC) -o $(NAME)
