@@ -1,31 +1,29 @@
-# variables: CC, SRC
-# CC: the compiler to be used
-# SRC: the .c files
-# OBJ: the .o files
-# RM: the program to delete files
-# NAME: the name of the executable
-# clean: deletes all Emacs and Vim temporary files along with the executable
-# oclean: deletes the object files
-# fclean: deletes all Emacs and Vim temporary files, the executable, and the object files
-# re: forces recompilation of all source files
+# name of the executable: school
+# rules: all
+# 	The all rule builds your executable
+# variables: CC, SRC, OBJ, NAME
+# 	CC: the compiler to be used
+# 	SRC: the .c files
+# 	OBJ: the .o files
+# 	NAME: the name of the executable
+# The all rule should recompile only the updated source files
+# You are not allowed to have a list of all the .o files
+
 CC = gcc
-SRC = school.c main.c
-NAME = school
+SRC = main.c school.c
 OBJ = $(SRC:.c=.o)
-RM = rm
+NAME = school
+RM = rm -f
 
-all: $(NAME)
-
-$(NAME): $(OBJ)
-	$(CC) $(SRC) -o $(NAME)
+all: $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
 
 clean:
-	$(RM) -f $(NAME) $(OBJ)
+	$(RM) $(NAME) *~
 
 oclean:
-	$(RM) -f $(OBJ)
+	$(RM) $(OBJ)
 
-fclean:
-	$(RM) -f $(NAME) $(OBJ)
+fclean: oclean clean
 
 re: fclean all
